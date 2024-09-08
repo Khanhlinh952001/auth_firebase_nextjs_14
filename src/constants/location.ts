@@ -1,0 +1,2 @@
+export const MIN_LOCATION_DELTA = 0.02;
+export const DEFAULT_LOCATION_DELTA = 0.015;
