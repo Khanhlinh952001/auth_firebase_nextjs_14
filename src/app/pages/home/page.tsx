@@ -4,10 +4,11 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import Loading from '@/component/loading/page';
+import { Avatar } from '@mui/material';
 const Page: React.FC = () => {
   const { logout, currentUser } = useAuth();
   const [loading, setLoading] = useState(false);
-
+   console.log(currentUser)
   const handleLogout = async () => {
     setLoading(true); // Đặt trạng thái tải để thông báo cho người dùng
     try {
@@ -25,7 +26,10 @@ const Page: React.FC = () => {
     <ProtectedRoute>
       <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-6">
         <div className="bg-white shadow-md rounded-lg p-8 max-w-md w-full">
-          <h1 className="text-2xl font-semibold text-gray-800 mb-4">Welcome, {currentUser?.name}</h1>
+          <div className='w-full flex justify-center'>
+             <Avatar src={currentUser?.photoURL} alt='avatar' />
+            </div>
+          <h1 className="text-2xl font-semibold text-gray-800 mb-4">Welcome, {currentUser?.name || currentUser?.displayName }</h1>
           <p className="text-gray-600 mb-6">You are now logged in. Explore the features of the application!</p>
           <button
             onClick={handleLogout}

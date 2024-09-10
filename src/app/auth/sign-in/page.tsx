@@ -9,9 +9,12 @@ const LoginPage: React.FC = () => {
   const [email, setEmail] = useState(""); // State lưu email người dùng
   const [password, setPassword] = useState(""); // State lưu mật khẩu người dùng
   const [errorMessage, setErrorMessage] = useState(""); // State lưu lỗi để hiển thị trên giao diện
-  const { login } = useAuth(); // Lấy hàm login từ context
+  const { login,loginWithGoogle } = useAuth(); // Lấy hàm login từ context
   const router = useRouter(); // Hook để chuyển hướng sau khi đăng nhập
 
+  const handleGoogleLogin = async () => {
+    await loginWithGoogle(); // Call the Google login function
+  };
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault(); // Ngăn chặn hành vi mặc định của form
 
@@ -98,7 +101,9 @@ const LoginPage: React.FC = () => {
             </div>
           </div>
         </form>
-
+        <button type="button" onClick={handleGoogleLogin}>
+        Sign in with Google
+      </button>
         {/* Hiển thị bản quyền */}
         <div className="flex justify-between text-gray-500 text-sm">
           <p>&copy;2021. All right reserved.</p>
